@@ -28,7 +28,7 @@ export const InputField = ({
         min={min}
         max={max}
         step={step}
-        value={value || ''}
+        value={value !== undefined ? value : ''}
         onChange={(e) => onChange(parseFloat(e.target.value) || 0)}
         className="w-full px-3 py-3 border border-gray-300 rounded-md bg-white text-black focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
       />
