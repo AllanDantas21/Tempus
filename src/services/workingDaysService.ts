@@ -24,7 +24,7 @@ export const fetchWorkingDays = async (
   const calculatedWorkingDays = weekdaysCount - allRelevantHolidays.length;
   
   const formattedHolidays = allRelevantHolidays.map(holiday => {
-    const [_, monthStr, dayStr] = holiday.date.split('-');
+    const [_, __, dayStr] = holiday.date.split('-');
     const day = parseInt(dayStr, 10);
     return `${day}/${month} - ${holiday.localName}`;
   });
