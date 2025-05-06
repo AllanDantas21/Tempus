@@ -20,7 +20,7 @@ export const IncomeCalculator = () => {
         setHolidays(result.holidays);
       } catch (error) {
         console.error('Error fetching working days:', error);
-        setWorkingDays(21);
+        setWorkingDays(22);
       } finally {
         setIsLoading(false);
       }
