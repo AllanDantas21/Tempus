@@ -28,9 +28,12 @@ export const InputField = ({
         min={min}
         max={max}
         step={step}
-        value={value !== undefined ? value : ''}
-        onChange={(e) => onChange(parseFloat(e.target.value) || 0)}
-        className="w-full px-3 py-3 border border-gray-300 rounded-md bg-white text-black focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+        value={value === 0 ? '' : value}
+        onChange={(e) => {
+          const inputValue = e.target.value;
+          onChange(inputValue === '' ? 0 : parseFloat(inputValue) || 0);
+        }}
+        className="w-full px-3 py-3 border border-gray-300 rounded-md bg-white text-black focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
       />
     </div>
   );
