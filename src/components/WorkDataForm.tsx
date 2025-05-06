@@ -1,11 +1,5 @@
+import { WorkDataFormProps } from '../types/components';
 import { InputField } from './InputField';
-
-type WorkDataFormProps = {
-  hourlyRate: number;
-  setHourlyRate: (value: number) => void;
-  hoursPerDay: number;
-  setHoursPerDay: (value: number) => void;
-};
 
 export const WorkDataForm = ({
   hourlyRate,
