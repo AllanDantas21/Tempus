@@ -1,9 +1,4 @@
-type IncomeSummaryProps = {
-  monthlyIncome: number;
-  workingDays?: number;
-  isLoading?: boolean;
-  holidays?: string[];
-};
+import { IncomeSummaryProps } from '../types/components';
 
 export const IncomeSummary = ({ 
   monthlyIncome, 
