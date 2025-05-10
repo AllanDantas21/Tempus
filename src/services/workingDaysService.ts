@@ -1,6 +1,19 @@
 import { Holiday, FormattedHoliday, WorkingDaysResult } from '../types/workingDays';
 
 export const fetchWorkingDays = async (
+  year = new Date().getFullYear(),
+  month = new Date().getMonth() + 1
+): Promise<WorkingDaysResult> => {
+  try {
+    const date = new Date(year, month - 1, 1);
+    return await getWorkingDaysData(date);
+  } catch (error) {
+    console.error('Error fetching working days:', error);
+    throw error;
+  }
+};
+
+const getWorkingDaysData = async (
   date: Date = new Date()
 ): Promise<WorkingDaysResult> => {
   const year = date.getFullYear();
@@ -53,18 +66,24 @@ const countWeekdaysInMonth = (year: number, month: number): number => {
 };
 
 const fetchHolidays = async (year: number): Promise<Holiday[]> => {
-  const response = await fetch(`https://date.nager.at/api/v3/PublicHolidays/${year}/BR`);
-  
-  if (!response.ok) {
-    throw new Error(`Failed to fetch holidays: ${response.status}`);
+  try {
+    const response = await fetch(`https://date.nager.at/api/v3/PublicHolidays/${year}/BR`);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch holidays: ${response.status}`);
+    }
+    
+    const holidays: Holiday[] = await response.json();
+    
+    return holidays.filter(holiday => 
+      holiday.global === true ||
+      (holiday.counties && holiday.counties.includes('BR-SP'))
+    );
+  } catch (error) {
+    console.error('Error fetching holidays from API:', error);
+    // Return empty array on error to allow the app to continue
+    return [];
   }
-  
-  const holidays: Holiday[] = await response.json();
-  
-  return holidays.filter(holiday => 
-    holiday.global === true ||
-    (holiday.counties && holiday.counties.includes('BR-SP'))
-  );
 };
 
 const filterWeekdayHolidays = (
