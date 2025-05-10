@@ -56,16 +56,15 @@ export const MonthlyIncomeGrid = ({ hourlyRate, hoursPerDay }: MonthlyIncomeGrid
             income: hourlyRate * hoursPerDay * result.workingDays,
             isLoading: false
           };
-          setMonthsData([...updatedMonthsData]);
         } catch (error) {
           console.error(`Error fetching working days for ${monthNames[monthIndex]}:`, error);
           updatedMonthsData[i] = {
             ...updatedMonthsData[i],
             isLoading: false
           };
-          setMonthsData([...updatedMonthsData]);
         }
       }
+      setMonthsData([...updatedMonthsData]);
     };
 
     if (hourlyRate > 0 && hoursPerDay > 0) {
