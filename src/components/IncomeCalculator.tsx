@@ -42,7 +42,7 @@ export const IncomeCalculator = () => {
 
   return (
     <>
-      <div className="flex w-full max-w-4xl bg-white rounded-xl shadow-lg overflow-hidden md:flex-row flex-col">
+      <div className="flex w-full max-w-4xl glass-effect overflow-hidden md:flex-row flex-col transition-all duration-300 card-hover">
         <IncomeSummary 
           monthlyIncome={monthlyIncome}
           workingDays={workingDays}
@@ -50,7 +50,7 @@ export const IncomeCalculator = () => {
           holidays={holidays}
         />
         
-        <div className="md:w-px w-full md:h-auto h-px bg-gray-200"></div>
+        <div className="md:w-px w-full md:h-auto h-px bg-white/20"></div>
         
         <WorkDataForm
           hourlyRate={hourlyRate}
@@ -62,7 +62,7 @@ export const IncomeCalculator = () => {
       
       <button
         onClick={toggleProjection}
-        className="mt-6 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-300 flex items-center justify-center"
+        className="mt-8 px-8 py-3 bg-gradient-to-r from-primary to-accent text-white font-medium rounded-full transition-all duration-300 flex items-center justify-center hover:shadow-lg hover:scale-105"
       >
         {showProjection ? 'Ocultar Projeção Anual' : 'Mostrar Projeção Anual'}
         <svg 
@@ -76,12 +76,16 @@ export const IncomeCalculator = () => {
         </svg>
       </button>
       
-      {showProjection && (
+      <div 
+        className={`transition-all duration-500 ease-in-out overflow-hidden ${
+          showProjection ? 'max-h-[5000px] opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
         <MonthlyIncomeGrid 
           hourlyRate={hourlyRate}
           hoursPerDay={hoursPerDay}
         />
-      )}
+      </div>
     </>
   );
 };
